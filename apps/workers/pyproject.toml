@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-blog-writer-workers"
+version = "0.1.0"
+description = "AI-powered blog writer workers"
+authors = [{name = "AI Blog Writer Team"}]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.104.1",
+    "uvicorn[standard]==0.24.0",
+    "pydantic==2.5.0",
+    "pydantic-settings==2.1.0",
+    "sqlalchemy==2.0.23",
+    "alembic==1.13.1",
+    "psycopg2-binary==2.9.9",
+    "redis==5.0.1",
+    "openai==1.3.7",
+    "anthropic==0.7.8",
+    "langchain==0.1.0",
+    "langchain-openai==0.0.2",
+    "sentence-transformers==2.2.2",
+    "numpy==1.24.3",
+    "pandas==2.1.4",
+    "pillow==10.1.0",
+    "requests==2.31.0",
+    "celery==5.3.4",
+    "nats-py==2.6.0",
+    "python-dotenv==1.0.0",
+    "httpx==0.25.2",
+    "tenacity==8.2.3",
+    "structlog==23.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==7.4.3",
+    "pytest-asyncio==0.21.1",
+    "black==23.11.0",
+    "isort==5.12.0",
+    "flake8==6.1.0",
+    "mypy==1.7.1",
+]
+
+[project.scripts]
+serp-worker = "workers.serp_worker:main"
+cluster-worker = "workers.cluster_worker:main"
+outline-worker = "workers.outline_worker:main"
+draft-worker = "workers.draft_worker:main"
+image-worker = "workers.image_worker:main"
+seo-worker = "workers.seo_worker:main"
+publish-worker = "workers.publish_worker:main"
+metrics-worker = "workers.metrics_worker:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
